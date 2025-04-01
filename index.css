@@ -1,0 +1,42 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+}
+
+.primary-background {
+  background-color: #03344f;
+}
+
+.primary-text {
+  color: #03344f;
+}
+
+.secondary-background {
+  background-color: #dfe9f4;
+}
+
+.secondary-text {
+  background-color: #dfe9f4;
+}
+
+.tertiary-text {
+  color: white;
+}
+
+.container {
+  padding: 1.5rem;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+/* ToDo: Check if this class is required or not at the end */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 2.8rem;
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnatchIt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/productCard.css" />
+  </head>
+  <body>
+    <!-- ToDo: Add header contents -->
+    <header class="container primary-background tertiary-text">Header</header>
+
+    <main class="container">
+      <section class="section top">
+        <div class="secondary-background page-details">
+          <p id="product-count" class="page-details__product-count"></p>
+        </div>
+
+        <div class="page-refines">
+          <div class="page-refines__parameter">
+            <div class="search">
+              <input
+                type="text"
+                id="search"
+                placeholder="Search products"
+                class="search-input"
+              />
+              <!-- ToDo: Check CSS and add this icon later-->
+              <!-- <i class="fa fa-search search-icon"></i> -->
+            </div>
+          </div>
+
+          <!-- ToDo: Pending dropdown option CSS -->
+          <div class="page-refines__parameter">
+            <div class="select">
+              <select id="sort" class="dropdown">
+                <option value="" disabled selected>Sort By</option>
+                <option value="title-asc">Name (A-Z)</option>
+                <option value="title-desc">Name (Z-A)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ToDo: Pending dropdown option CSS -->
+          <div class="page-refines__parameter">
+            <div class="select">
+              <select id="category-filter" class="dropdown">
+                <option value="" disabled selected>Filter by Category</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="page-refines__parameter">
+            <button id="reset" class="reset-button primary-background">
+              Reset
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section bottom">
+        <!-- ToDo: 0 products container design -->
+        <div id="product-container"></div>
+      </section>
+    </main>
+
+    <!-- ToDo: Add footer contents -->
+    <footer class="container primary-background tertiary-text">Footer</footer>
+
+    <script src="js/main.js" async defer></script>
+  </body>
+</html>
