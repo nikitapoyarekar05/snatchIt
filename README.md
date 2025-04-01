@@ -1,6 +1,6 @@
 # SnatchIt
 
-SnatchIt is a simple and intuitive product listing web application that allows users to browse, search, and filter products efficiently. It provides features such as category-based filtering, sorting, and search functionality to enhance user experience.
+SnatchIt is a simple and intuitive product listing webpage that allows users to browse, search, and filter products efficiently. It provides features such as category-based filtering, sorting, and search functionality to enhance user experience.
 
 ## Features
 
