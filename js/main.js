@@ -88,7 +88,7 @@ const displayProducts = (products) => {
     productElement.innerHTML = `
         <img src="${imageUrl}" alt="${
       product.title
-    }" class="product-image" onerror="this.onerror=null; this.src='/public/pikachu.jpg';" />
+    }" class="product-image" onerror="this.onerror=null; this.src='/pikachu.jpg';" />
         <div class="product-details">
           <h3 class="product-details__name">${product.title}</h3>
           <p class="product-details__category">${product.category.replace(
