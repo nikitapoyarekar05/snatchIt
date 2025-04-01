@@ -20,15 +20,22 @@
     <link rel="stylesheet" href="styles/productCard.css" />
   </head>
   <body>
-    <!-- ToDo: Add header contents -->
-    <header class="container primary-background tertiary-text">Header</header>
+    <header class="container primary-background tertiary-text header">
+      <div><h1 class="logo">SnatchIt</h1></div>
+      <div>
+        <ol class="menu__list">
+          <li class="menu-list--item">
+            <a class="menu-list--item__link" href="#">Home</a>
+          </li>
+          <li class="menu-list--item">
+            <a class="menu-list--item__link" href="#">Products</a>
+          </li>
+        </ol>
+      </div>
+    </header>
 
     <main class="container">
       <section class="section top">
-        <div class="secondary-background page-details">
-          <p id="product-count" class="page-details__product-count"></p>
-        </div>
-
         <div class="page-refines">
           <div class="page-refines__parameter">
             <div class="search">
@@ -38,12 +45,10 @@
                 placeholder="Search products"
                 class="search-input"
               />
-              <!-- ToDo: Check CSS and add this icon later-->
-              <!-- <i class="fa fa-search search-icon"></i> -->
+              <i class="fa fa-search search-icon"></i>
             </div>
           </div>
 
-          <!-- ToDo: Pending dropdown option CSS -->
           <div class="page-refines__parameter">
             <div class="select">
               <select id="sort" class="dropdown">
@@ -56,7 +61,6 @@
             </div>
           </div>
 
-          <!-- ToDo: Pending dropdown option CSS -->
           <div class="page-refines__parameter">
             <div class="select">
               <select id="category-filter" class="dropdown">
@@ -74,13 +78,14 @@
       </section>
 
       <section class="section bottom">
-        <!-- ToDo: 0 products container design -->
         <div id="product-container"></div>
+        <div id="zero-product-container"></div>
       </section>
     </main>
 
-    <!-- ToDo: Add footer contents -->
-    <footer class="container primary-background tertiary-text">Footer</footer>
+    <footer class="container primary-background tertiary-text footer">
+      <p>&copy; 2025 Nikita Poyarekar | Designed with ❤️</p>
+    </footer>
 
     <script src="js/main.js" async defer></script>
   </body>

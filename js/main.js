@@ -30,18 +30,6 @@ const fetchData = async (url) => {
 };
 
 /*
- * * Function to update product count displayed on the page
- */
-const productCount = (products) => {
-  const productCountElement = document.getElementById("product-count");
-  if (productCountElement && products?.products) {
-    productCountElement.textContent = `${products.products.length} ${
-      products.products.length > 1 ? "products" : "product"
-    } found.`;
-  }
-};
-
-/*
  * * Function to fetch and display products based on sorting, search, and category options
  */
 const getProducts = async (
@@ -63,7 +51,6 @@ const getProducts = async (
   const products = await fetchData(url);
   if (products && products.products) {
     allProducts = products.products;
-    productCount(products);
     displayProducts(allProducts);
   }
 };
@@ -77,18 +64,19 @@ const displayProducts = (products) => {
 
   productContainer.innerHTML = "";
 
-  products.forEach((product) => {
-    let imageUrl =
-      product.thumbnail ||
-      (product.images?.length ? product.images[0] : "/public/pikachu.jpg");
+  if (products.length > 0) {
+    products?.forEach((product) => {
+      let imageUrl =
+        product.thumbnail ||
+        (product.images?.length ? product.images[0] : "/public/pikachu.jpg");
 
-    const productElement = document.createElement("div");
-    productElement.classList.add("product-card");
+      const productElement = document.createElement("div");
+      productElement.classList.add("product-card");
 
-    productElement.innerHTML = `
+      productElement.innerHTML = `
         <img src="${imageUrl}" alt="${
-      product.title
-    }" class="product-image" onerror="this.onerror=null; this.src='public/pikachu.jpg';" />
+        product.title
+      }" class="product-image" onerror="this.onerror=null; this.src='public/pikachu.jpg';" />
         <div class="product-details">
           <h3 class="product-details__name">${product.title}</h3>
           <p class="product-details__category">${product.category.replace(
@@ -102,8 +90,15 @@ const displayProducts = (products) => {
         </div>
       `;
 
-    productContainer.appendChild(productElement);
-  });
+      productContainer.appendChild(productElement);
+    });
+  } else {
+    const zeroProductContainer = document.getElementById(
+      "zero-product-container"
+    );
+    zeroProductContainer.classList.add("zero-product");
+    zeroProductContainer.innerHTML = "No product found.";
+  }
 };
 
 /*

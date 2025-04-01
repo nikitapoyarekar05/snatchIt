@@ -1,17 +1,29 @@
-.page-details {
-  padding: 0.5rem;
+.header {
+  display: flex;
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.page-details__heading {
-  font-size: 3.25rem;
-  text-transform: capitalize;
-  line-height: 4rem;
-  letter-spacing: 0;
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
-/* ToDo: Check gap between search and sort */
+.menu__list {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu-list--item__link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
 .page-refines {
-  padding: 2rem 0;
+  padding: 0 2rem 2rem 2rem;
   display: flex;
   justify-content: flex-start;
   gap: 2.25rem;
@@ -23,14 +35,12 @@
 }
 
 .search {
-  width: 100%;
-  width: 20rem;
   height: 2.5rem;
   padding: 0.5rem 0;
 }
 
 .search-input {
-  width: 100%;
+  width: 20rem;
   height: 2.5rem;
   border: 0.063rem solid #dfe9f4;
   border-radius: 0.25rem;
@@ -42,14 +52,13 @@
   border-color: #03344f;
 }
 
-/* ToDo: Fix this CSS class */
 .search-icon {
   position: absolute;
-  right: 0.5rem;
+  right: 1rem;
   top: 55%;
   transform: translateY(-50%);
-  pointer-events: none; /* Prevents icon from interfering with clicks inside the input */
-  color: #888; /* Adjust icon color */
+  pointer-events: none;
+  color: #dfe9f4;
 }
 
 .select {
@@ -57,7 +66,6 @@
 }
 
 .dropdown {
-  width: 100%;
   width: 20rem;
   height: 2.72rem;
   padding: 0.5rem 0;
@@ -68,7 +76,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='%23000000'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
-    no-repeat right 10px center;
+    no-repeat right 0.625rem center;
   background-size: 1rem;
   padding-left: 1.875rem;
   padding-right: 0.625rem;
@@ -80,7 +88,7 @@
 }
 
 .reset-button {
-  padding: 5px 10px;
+  padding: 0.313rem 0.625rem;
   color: white;
   border: none;
   cursor: pointer;
@@ -99,6 +107,15 @@
   gap: 1.5rem;
 }
 
+.zero-product {
+  font-size: 2rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 3rem;
+}
+
 @media (max-width: 768px) {
   .page-refines {
     flex-direction: column;
@@ -109,7 +126,7 @@
   }
 
   .search-input {
-    width: 94%;
+    width: 18.5rem;
   }
 }
 
@@ -119,7 +136,7 @@
   }
 
   .search-input {
-    width: 94%;
+    width: 18.5rem;
   }
 }
 

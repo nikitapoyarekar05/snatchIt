@@ -30,13 +30,6 @@
   padding: 1.5rem;
 }
 
-.section {
+.section:last-child {
   margin-bottom: 1.5rem;
-}
-
-/* ToDo: Check if this class is required or not at the end */
-@media (max-width: 768px) {
-  .container {
-    padding-left: 2.8rem;
-  }
 }
