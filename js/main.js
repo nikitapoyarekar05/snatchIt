@@ -195,9 +195,11 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 /*
- * * Default call on page load to fetch products with default sorting (A-Z by title)
+  * Default call on page load to fetch products with default sorting (A-Z by title)
+  ToDo: Check why this call is not working on GitHub pages
  */
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOMContentLoaded");
   getProducts("title", "asc");
   getCategories();
 });
