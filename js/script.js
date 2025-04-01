@@ -8,20 +8,15 @@ const ENDPOINTS = {
 
 let allProducts = [];
 
-/*
- * * Function to fetch data from a given URL
+/**
+ * Fetch data from a given URL with error handling.
  */
 const fetchData = async (url) => {
   try {
     const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
     });
-
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
-
     return await response.json();
   } catch (error) {
     console.error("Fetch Error:", error.message);
@@ -29,8 +24,8 @@ const fetchData = async (url) => {
   }
 };
 
-/*
- * * Function to fetch and display products based on sorting, search, and category options
+/**
+ * Fetch and display products based on sorting, search, and category.
  */
 const getProducts = async (
   sortBy = "",
@@ -40,39 +35,36 @@ const getProducts = async (
 ) => {
   let url = ENDPOINTS.PRODUCTS;
 
-  if (category) {
-    url = `${ENDPOINTS.CATEGORY_PRODUCTS}${category}`;
-  } else if (query) {
-    url = ENDPOINTS.SEARCH + query;
-  } else if (sortBy && order) {
-    url += `sortBy=${sortBy}&order=${order}`;
-  }
+  if (category) url = `${ENDPOINTS.CATEGORY_PRODUCTS}${category}`;
+  else if (query) url = ENDPOINTS.SEARCH + query;
+  else if (sortBy && order) url += `sortBy=${sortBy}&order=${order}`;
 
-  const products = await fetchData(url);
-  if (products && products.products) {
-    allProducts = products.products;
+  const response = await fetchData(url);
+  //   console.log({ response });
+  if (response?.products) {
+    allProducts = response.products;
     displayProducts(allProducts);
   }
 };
 
-/*
- * * Function to display products on the screen
+/**
+ * Efficiently render products using DocumentFragment.
  */
 const displayProducts = (products) => {
   const productContainer = document.getElementById("product-container");
   if (!productContainer) return;
 
   productContainer.innerHTML = "";
+  const fragment = document.createDocumentFragment();
 
   if (products.length > 0) {
-    products?.forEach((product) => {
+    products.forEach((product) => {
       let imageUrl =
         product.thumbnail ||
         (product.images?.length ? product.images[0] : "/public/pikachu.jpg");
 
       const productElement = document.createElement("div");
       productElement.classList.add("product-card");
-
       productElement.innerHTML = `
         <img src="${imageUrl}" alt="${
         product.title
@@ -90,98 +82,75 @@ const displayProducts = (products) => {
         </div>
       `;
 
-      productContainer.appendChild(productElement);
+      fragment.appendChild(productElement);
     });
+
+    productContainer.appendChild(fragment);
   } else {
-    const zeroProductContainer = document.getElementById(
-      "zero-product-container"
-    );
-    zeroProductContainer.classList.add("zero-product");
-    zeroProductContainer.innerHTML = "No product found.";
+    document.getElementById("zero-product-container").innerHTML =
+      "No product found.";
   }
 };
 
-/*
- * * Function to fetch and display categories for filtering
+/**
+ * Fetch and display category options.
  */
 const getCategories = async () => {
   const categories = await fetchData(ENDPOINTS.CATEGORY_LIST);
   if (categories) {
     const categorySelect = document.getElementById("category-filter");
-
     categorySelect.innerHTML = `<option value="">All Categories</option>`;
 
+    const fragment = document.createDocumentFragment();
     categories.forEach((category) => {
       const option = document.createElement("option");
       option.value = category;
       option.textContent = category;
-      categorySelect.appendChild(option);
+      fragment.appendChild(option);
     });
+
+    categorySelect.appendChild(fragment);
   }
 };
 
-/*
- * * Event Listener for Sorting
+/**
+ * Utility function to debounce search input.
  */
-document.getElementById("sort").addEventListener("change", (event) => {
-  const selectedValue = event.target.value;
-  let sortBy = "",
-    order = "";
+const debounce = (func, delay = 300) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), delay);
+  };
+};
 
-  switch (selectedValue) {
-    case "price-asc":
-      sortBy = "price";
-      order = "asc";
-      break;
-    case "price-desc":
-      sortBy = "price";
-      order = "desc";
-      break;
-    case "title-asc":
-      sortBy = "title";
-      order = "asc";
-      break;
-    case "title-desc":
-      sortBy = "title";
-      order = "desc";
-      break;
-  }
-
-  document.getElementById("search").value = "";
-  document.getElementById("category-filter").value = "";
-
-  getProducts(sortBy, order);
-});
-
-/*
- * * Event Listener for Search input
+/**
+ * Event delegation for handling multiple events efficiently.
  */
-document.getElementById("search").addEventListener("input", (event) => {
-  const query = event.target.value.trim();
+document.addEventListener("change", (event) => {
+  const { id, value } = event.target;
 
-  document.getElementById("sort").value = "";
-  document.getElementById("category-filter").value = "";
-
-  getProducts("", "", query);
-});
-
-/*
- * * Event Listener for Category Filter
- */
-document
-  .getElementById("category-filter")
-  .addEventListener("change", (event) => {
-    const selectedCategory = event.target.value;
-
+  if (id === "sort") {
+    const [sortBy, order] = value.split("-");
+    document.getElementById("search").value = "";
+    document.getElementById("category-filter").value = "";
+    getProducts(sortBy, order);
+  } else if (id === "category-filter") {
     document.getElementById("search").value = "";
     document.getElementById("sort").value = "";
-    console.log({ selectedCategory });
-    getProducts("", "", "", selectedCategory);
-  });
+    getProducts("", "", "", value);
+  }
+});
 
-/*
- * * Event Listener for Reset Filters button
- */
+document.getElementById("search").addEventListener(
+  "input",
+  debounce((event) => {
+    document.getElementById("sort").value = "";
+    document.getElementById("category-filter").value = "";
+    getProducts("", "", event.target.value);
+  })
+);
+
 document.getElementById("reset").addEventListener("click", () => {
   document.getElementById("search").value = "";
   document.getElementById("sort").selectedIndex = 0;
@@ -189,8 +158,9 @@ document.getElementById("reset").addEventListener("click", () => {
   getProducts("title", "asc");
 });
 
-/*
- * Default call on page load to fetch products with default sorting (A-Z by title)
+/**
+ * Load default products and categories on page load.
  */
-getProducts("title", "asc");
-getCategories();
+(async () => {
+  await Promise.all([getProducts("title", "asc"), getCategories()]);
+})();
