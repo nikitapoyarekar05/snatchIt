@@ -93,12 +93,6 @@
   color: black;
 }
 
-@media (max-width: 768px) {
-  .page-refines {
-    flex-direction: column;
-  }
-}
-
 #product-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 cards per row for desktops */
@@ -106,14 +100,26 @@
 }
 
 @media (max-width: 768px) {
+  .page-refines {
+    flex-direction: column;
+  }
+
   #product-container {
     grid-template-columns: repeat(2, 1fr); /* 2 cards per row on tablets */
+  }
+
+  .search-input {
+    width: 94%;
   }
 }
 
 @media (max-width: 576px) {
   #product-container {
     grid-template-columns: 1fr; /* 1 card per row on mobile */
+  }
+
+  .search-input {
+    width: 94%;
   }
 }
 
