@@ -200,4 +200,8 @@ document.getElementById("reset").addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   getProducts("title", "asc");
   getCategories();
+  document.getElementById("search").value = "";
+  document.getElementById("sort").selectedIndex = 0;
+  document.getElementById("category-filter").selectedIndex = 0;
+  getProducts("title", "asc");
 });
